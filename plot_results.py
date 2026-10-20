@@ -1,7 +1,9 @@
 import csv
 import matplotlib
-matplotlib.use("Agg")   # no display needed — saves to file
+matplotlib.use("Agg")   # no display needed, saves to file
 import matplotlib.pyplot as plt
+
+from limits import V_LOW, V_HIGH
 
 pkt_ids  = []
 voltages = []
@@ -21,12 +23,12 @@ fig, ax = plt.subplots(figsize=(10, 5))
 ax.plot(pkt_ids, voltages, color="#888888", linewidth=1, zorder=1)
 ax.scatter(pkt_ids, voltages, c=colors, s=60, zorder=2)
 
-ax.axhline(1.5, color="#e67e22", linewidth=1.2, linestyle="--", label="V_LOW (1.5 V)")
-ax.axhline(3.0, color="#9b59b6", linewidth=1.2, linestyle="--", label="V_HIGH (3.0 V)")
+ax.axhline(V_LOW, color="#e67e22", linewidth=1.2, linestyle="--", label=f"V_LOW ({V_LOW} V)")
+ax.axhline(V_HIGH, color="#9b59b6", linewidth=1.2, linestyle="--", label=f"V_HIGH ({V_HIGH} V)")
 
 ax.set_xlabel("Packet ID")
 ax.set_ylabel("Voltage (V)")
-ax.set_title("UART ADC Voltage Readings — Pass/Fail")
+ax.set_title("UART ADC Voltage Readings: Pass/Fail")
 ax.legend()
 ax.set_xticks(pkt_ids)
 
